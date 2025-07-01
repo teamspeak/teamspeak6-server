@@ -88,7 +88,7 @@ This is the best practice for a server you intend to keep running. Create a dock
 ```yaml
 services:
   teamspeak:
-    image: teamspeaksystems/teamspeak6-server:v6.0.0-beta2
+    image: teamspeaksystems/teamspeak6-server:v6.0.0-beta3
     container_name: teamspeak-server
     restart: unless-stopped
     ports:
