@@ -1,0 +1,27 @@
+services:
+  teamspeak:
+    image: teamspeaksystems/teamspeak6-server:latest
+    container_name: teamspeak-server
+    restart: unless-stopped
+    ports:
+      - "9987:9987/udp"    # Default voice port
+      - "30033:30033/tcp"  # File transfer port
+      # - "10022:10022/tcp" # (Optional) ServerQuery SSH port
+      # - "10080:10080/tcp"  # (Optional) WebQuery port
+    environment:
+      - TSSERVER_LICENSE_ACCEPTED=accept
+      - TSSERVER_DEFAULT_PORT=9987
+      - TSSERVER_VOICE_IP=0.0.0.0
+      - TSSERVER_FILE_TRANSFER_PORT=30033
+      - TSSERVER_FILE_TRANSFER_IP=0.0.0.0
+      # - TSSERVER_QUERY_HTTP_ENABLED=true
+      # - TSSERVER_QUERY_SSH_ENABLED=false
+      # - TSSERVER_MACHINE_ID=my_unique_machine_id
+      # - TSSERVER_LOG_PATH=/var/ts3server/logs
+      # - TSSERVER_QUERY_ADMIN_PASSWORD=secretpassword
+    volumes:
+      - tsserver-data:/var/ts3server
+
+volumes:
+  tsserver-data:
+    name: tsserver-data
