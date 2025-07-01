@@ -17,10 +17,10 @@ services:
       # - TSSERVER_QUERY_HTTP_ENABLED=true
       # - TSSERVER_QUERY_SSH_ENABLED=false
       # - TSSERVER_MACHINE_ID=my_unique_machine_id
-      # - TSSERVER_LOG_PATH=/var/ts3server/logs
+      # - TSSERVER_LOG_PATH=/var/tsserver/logs
       # - TSSERVER_QUERY_ADMIN_PASSWORD=secretpassword
     volumes:
-      - tsserver-data:/var/ts3server
+      - tsserver-data:/var/tsserver
 
 volumes:
   tsserver-data:
