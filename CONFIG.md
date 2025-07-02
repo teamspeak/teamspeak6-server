@@ -31,15 +31,16 @@ This document provides a detailed list of frequently used command-line parameter
 
 #### Database
 
-| Parameter                         | Environment Variable           | Description                                                                 |
-|----------------------------------|--------------------------------|-----------------------------------------------------------------------------|
-| `--db-plugin <plugin>`           | `TSSERVER_DATABASE_PLUGIN`     | Specifies the database plugin to use (e.g., `sqlite3`, `mariadb`).         |
-| `--db-host <host>`               | `TSSERVER_DATABASE_HOST`       | The hostname or IP address of your database server.                        |
-| `--db-port <port>`               | `TSSERVER_DATABASE_PORT`       | The port used to connect to your database server.                          |
-| `--db-name <name>`               | `TSSERVER_DATABASE_NAME`       | The name of the database to use.                                           |
-| `--db-username <user>`           | `TSSERVER_DATABASE_USERNAME`   | The username for database authentication.                                  |
-| `--db-password <pass>`           | `TSSERVER_DATABASE_PASSWORD`   | The password for database authentication.                                  |
-| `--db-connections <num>`         | `TSSERVER_DATABASE_CONNECTIONS`| Number of connections to establish to the database (Default: 10).          |
+| Parameter                         | Environment Variable              | Description                                                                            |
+|----------------------------------|------------------------------------|----------------------------------------------------------------------------------------|
+| `--db-plugin <plugin>`           | `TSSERVER_DATABASE_PLUGIN`         | Specifies the database plugin to use (e.g., `sqlite3`, `mariadb`).                     |
+| `--db-host <host>`               | `TSSERVER_DATABASE_HOST`           | The hostname or IP address of your database server.                                    |
+| `--db-port <port>`               | `TSSERVER_DATABASE_PORT`           | The port used to connect to your database server.                                      |
+| `--db-name <name>`               | `TSSERVER_DATABASE_NAME`           | The name of the database to use.                                                       |
+| `--db-username <user>`           | `TSSERVER_DATABASE_USERNAME`       | The username for database authentication.                                              |
+| `--db-password <pass>`           | `TSSERVER_DATABASE_PASSWORD`       | The password for database authentication.                                              |
+| `--db-connections <num>`         | `TSSERVER_DATABASE_CONNECTIONS`    | Number of connections to establish to the database (Default: 10).                      |
+| `--db-sql-create-path <path>`    | `TSSERVER_DATABASE_SQL_CREATE_PATH`| The path for the database creation scripts (e.g., `create_mariadb`, `create_sqlite`).  |
 
 ---
 
@@ -216,7 +217,7 @@ server:
     - **Environment Variable:** `TSSERVER_DATABASE_SQL_PATH`
 
 - **`--db-sql-create-path [create_sqlite]`**
-    - Path relative to the `--sql-path` where to load the database creation scripts from.
+    - Path relative to the `--sql-path` where to load the database creation scripts from. Valid values are `create_mariadb` or `create_sqlite`.
     - **Environment Variable:** `TSSERVER_DATABASE_SQL_CREATE_PATH`
 
 - **`--db-client-keep-days [30]`**
