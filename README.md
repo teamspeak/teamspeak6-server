@@ -19,6 +19,8 @@ Tried & tested for nearly 25 years, we have a solution that fits everyone's need
 
 **Limitations:** Please note that **TeamSpeak 3 Server licenses are not compatible** with TeamSpeak 6 Servers, and currently, there is **no migration path available between the two versions**.
 
+**Preview License:** In response to your feedback, the server now comes with a **temporary** 32-slot preview license to offer greater flexibility during the evaluation period. Please note that this license is **only valid for two months**.
+
 Additionally, it is **not yet possible to obtain or upgrade to a larger license for TeamSpeak 6**.
 
 We truly appreciate your patience and understanding as we continue to work on solutions to better support your needs in the future.
