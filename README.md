@@ -57,7 +57,7 @@ chmod +x tsserver
 Run the server from your terminal, making sure to accept the license:
 
 ```sh
-./tsserver --accept-license=accept
+./tsserver --accept-license
 ```
 
 <h2><img width="22" src="/icons/windows.svg">&nbsp;On Windows:</h2>
@@ -66,7 +66,7 @@ Open Command Prompt or PowerShell and navigate to the directory where you extrac
 
 Run the server executable, making sure to accept the license:
 ```powershell
-tsserver.exe --accept-license=accept
+tsserver.exe
 ```
 
 <h2><img width="32" src="/icons/docker.svg">&nbsp;Running the Server with Docker (Recommended):</h2>
@@ -74,7 +74,7 @@ Docker is the easiest way to run the TeamSpeak 6 server in an isolated and manag
 
 ### 1. Simple docker run command:
 
-For a quick start, you can use the docker run command. Make sure your licensekey.dat is in your current directory.
+For a quick start, you can use the docker run command.
 
 ```sh
 docker run -it --rm \

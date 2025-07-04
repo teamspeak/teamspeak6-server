@@ -2,8 +2,7 @@
 
 ### TeamSpeak 6 Server: Frequently Used Parameters & Environment Variables
 
-This document provides a detailed list of frequently used command-line parameters and their corresponding environment variables for configuring the TeamSpeak 6 server. You can configure the server using:
-
+This document outlines the most commonly used command-line parameters and their equivalent environment variables for configuring the TeamSpeak 6 server. You can configure the server using either of the following methods:
 - Command-line flags
 - Environment variables
 - A `tsserver.yaml` configuration file
@@ -12,49 +11,49 @@ This document provides a detailed list of frequently used command-line parameter
 
 #### General & Core Server Configuration
 
-| Parameter                         | Environment Variable           | Description                                                                 |
-|----------------------------------|--------------------------------|-----------------------------------------------------------------------------|
-| `--config-file <file>`           | `TSSERVER_CONFIG_FILE`         | Specifies the configuration file to load (e.g., `tsserver.yaml`).          |
-| `--license-path <path>`          | `TSSERVER_LICENSE_PATH`        | Directory path where the server will look for the `licensekey.dat` file.   |
-| `--accept-license [0\|1]`        | `TSSERVER_LICENSE_ACCEPTED`    | Set to `1` or `accept` to agree to the server license.                     |
-| `--default-voice-port <port>`    | `TSSERVER_DEFAULT_PORT`        | Sets the default UDP voice port for the first virtual server (Default: 9987). |
+| Parameter                     | Environment Variable           | Description                                                                                                                                           |
+|-------------------------------|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--config-file <file>`        | `TSSERVER_CONFIG_FILE`         | Specifies the configuration file to load (e.g., `tsserver.yaml`).                                                                                     |
+| `--license-path <path>`       | `TSSERVER_LICENSE_PATH`        | Directory path where the server will look for the `licensekey.dat` file.                                                                              |
+| `--accept-license`            | `TSSERVER_LICENSE_ACCEPTED`    | Use the --accept-license flag or set the environment variable to 1 or accept to confirm that you have read and accepted the server license agreement. |
+| `--default-voice-port <port>` | `TSSERVER_DEFAULT_PORT`        | Permanently sets the default UDP voice port for the first virtual server created (Default: 9987).                                                     |
 
 ---
 
 #### File Transfer
 
-| Parameter                         | Environment Variable           | Description                                                                 |
-|----------------------------------|--------------------------------|-----------------------------------------------------------------------------|
-| `--filetransfer-port <port>`     | `TSSERVER_FILE_TRANSFER_PORT`  | The TCP port used for file transfers (Default: 30033).                      |         |
+| Parameter                         | Environment Variable           | Description                                            |
+|-----------------------------------|--------------------------------|--------------------------------------------------------|
+| `--filetransfer-port <port>`      | `TSSERVER_FILE_TRANSFER_PORT`  | The TCP port used for file transfers (Default: 30033). |
 
 ---
 
 #### Database
 
-| Parameter                         | Environment Variable              | Description                                                                            |
-|----------------------------------|------------------------------------|----------------------------------------------------------------------------------------|
-| `--db-plugin <plugin>`           | `TSSERVER_DATABASE_PLUGIN`         | Specifies the database plugin to use (e.g., `sqlite3`, `mariadb`).                     |
-| `--db-host <host>`               | `TSSERVER_DATABASE_HOST`           | The hostname or IP address of your database server.                                    |
-| `--db-port <port>`               | `TSSERVER_DATABASE_PORT`           | The port used to connect to your database server.                                      |
-| `--db-name <name>`               | `TSSERVER_DATABASE_NAME`           | The name of the database to use.                                                       |
-| `--db-username <user>`           | `TSSERVER_DATABASE_USERNAME`       | The username for database authentication.                                              |
-| `--db-password <pass>`           | `TSSERVER_DATABASE_PASSWORD`       | The password for database authentication.                                              |
-| `--db-connections <num>`         | `TSSERVER_DATABASE_CONNECTIONS`    | Number of connections to establish to the database (Default: 10).                      |
-| `--db-sql-create-path <path>`    | `TSSERVER_DATABASE_SQL_CREATE_PATH`| The path for the database creation scripts (e.g., `create_mariadb`, `create_sqlite`).  |
+| Parameter                         | Environment Variable              | Description                                                                           |
+|----------------------------------|------------------------------------|---------------------------------------------------------------------------------------|
+| `--db-plugin <plugin>`           | `TSSERVER_DATABASE_PLUGIN`         | Specifies the database plugin to use (e.g., `sqlite3`, `mariadb`).                    |
+| `--db-host <host>`               | `TSSERVER_DATABASE_HOST`           | The hostname or IP address of your database server.                                   |
+| `--db-port <port>`               | `TSSERVER_DATABASE_PORT`           | The port used to connect to your database server.                                     |
+| `--db-name <name>`               | `TSSERVER_DATABASE_NAME`           | The name of the database to use.                                                      |
+| `--db-username <user>`           | `TSSERVER_DATABASE_USERNAME`       | The username for database authentication.                                             |
+| `--db-password <pass>`           | `TSSERVER_DATABASE_PASSWORD`       | The password for database authentication.                                             |
+| `--db-connections <num>`         | `TSSERVER_DATABASE_CONNECTIONS`    | Number of connections to establish to the database (Default: 10).                     |
+| `--db-sql-create-path <path>`    | `TSSERVER_DATABASE_SQL_CREATE_PATH`| The path for the database creation scripts (e.g., `create_mariadb`, `create_sqlite`). |
 
 ---
 
 #### Server Query
 
-| Parameter                         | Environment Variable             | Description                                                             |
-|----------------------------------|----------------------------------|-------------------------------------------------------------------------|
-| `--query-http-enable [0\|1]`     | `TSSERVER_QUERY_HTTP_ENABLED`    | Enables the HTTP query interface.                                      |
-| `--query-http-port <port>`       | `TSSERVER_QUERY_HTTP_PORT`       | The port for the HTTP query interface (Default: 10080).                |
-| `--query-ssh-enable [0\|1]`      | `TSSERVER_QUERY_SSH_ENABLED`     | Enables the SSH query interface.                                       |
-| `--query-ssh-port <port>`        | `TSSERVER_QUERY_SSH_PORT`        | The port for the SSH query interface (Default: 10022).                 |
-| `--query-admin-password <pass>`  | `TSSERVER_QUERY_ADMIN_PASSWORD`  | Sets a password for the serveradmin query account, overriding the database. |
-| `--query-ip-allow-list <file>`   | `TSSERVER_QUERY_ALLOW_LIST`      | Path to a file listing IPs exempt from query flood protection.         |
-| `--query-ip-block-list <file>`   | `TSSERVER_QUERY_DENY_LIST`       | Path to a file listing IPs that are blocked from the query interface.  |
+| Parameter                       | Environment Variable             | Description                                                                 |
+|---------------------------------|----------------------------------|-----------------------------------------------------------------------------|
+| `--query-http-enable`           | `TSSERVER_QUERY_HTTP_ENABLED`    | Enables the HTTP query interface.                                           |
+| `--query-http-port <port>`      | `TSSERVER_QUERY_HTTP_PORT`       | The port for the HTTP query interface (Default: 10080).                     |
+| `--query-ssh-enable`            | `TSSERVER_QUERY_SSH_ENABLED`     | Enables the SSH query interface.                                            |
+| `--query-ssh-port <port>`       | `TSSERVER_QUERY_SSH_PORT`        | The port for the SSH query interface (Default: 10022).                      |
+| `--query-admin-password <pass>` | `TSSERVER_QUERY_ADMIN_PASSWORD`  | Sets a password for the serveradmin query account, overriding the database. |
+| `--query-ip-allow-list <file>`  | `TSSERVER_QUERY_ALLOW_LIST`      | Path to a file listing IPs exempt from query flood protection.              |
+| `--query-ip-block-list <file>`  | `TSSERVER_QUERY_DENY_LIST`       | Path to a file listing IPs that are blocked from the query interface.       |
 
 ### Example `tsserver.yaml` Configuration
 
@@ -134,264 +133,404 @@ server:
       private-key: ""
 ```
 
-### Further Options
+### Further Parameters and Environment Variables
 
 #### General Options
 
-- **`-h, --help`**
-    - Prints the help message and exits.
+* **`-h, --help`**
 
-- **`--write-config-file`**
-    - Writes the current configuration to the config file.
+  * Prints the help message and exits.
+  * **Type:** `BOOLEAN FLAG`
 
-- **`--config-file [tsserver.yaml]`**
-    - Configuration file to load.
-    - **Environment Variable:** `TSSERVER_CONFIG_FILE`
+* **`--accept-license`**
 
-- **`-v, --version`**
-    - Displays program version information and exits.
+  * Confirms you have read and accepted the server license agreement.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_LICENSE_ACCEPTED`
 
-- **`--license-path [.]`**
-    - Path where the server will look for the server license.
-    - **Environment Variable:** `TSSERVER_LICENSE_PATH`
+* **`--write-config-file`**
+
+  * Writes the current configuration to the config file.
+  * **Type:** `BOOLEAN FLAG`
+
+* **`--config-file [tsserver.yaml]`**
+
+  * Configuration file to load.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_CONFIG_FILE`
+
+* **`-v, --version`**
+
+  * Displays program version information and exits.
+  * **Type:** `BOOLEAN FLAG`
+
+* **`--license-path [.]`**
+
+  * Path where the server will look for the server license.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_LICENSE_PATH`
+
+---
 
 #### Server Configuration
 
-- **`--default-voice-port :INT in [1 - 65535] [9987]`**
-    - Sets the default voice port for the first virtual server.
-    - **Environment Variable:** `TSSERVER_DEFAULT_PORT`
+* **`--default-voice-port [9987]`**
 
-- **`--voice-ip [[0.0.0.0,::]]`**
-    - IP address for the server to bind the voice port to.
-    - **Environment Variable:** `TSSERVER_VOICE_IP`
+  * Permanently sets the default voice port for the first virtual server created.
+  * **Type:** `INTEGER in [1 - 65535]`
+  * **Environment Variable:** `TSSERVER_DEFAULT_PORT`
 
-- **`--machine-id`**
-    - A string to distinguish this instance from other instances using the same database.
-    - **Environment Variable:** `TSSERVER_MACHINE_ID`
+* **`--voice-ip [[0.0.0.0,::]]`**
 
-- **`--threads-voice-udp :UINT in [1 - 16] [5]`**
-    - Number of threads to use for voice processing.
-    - **Environment Variable:** `TSSERVER_VOICE_UDP_THREADS`
+  * IP address for the server to bind the voice port to.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_VOICE_IP`
+
+* **`--machine-id`**
+
+  * A string to distinguish this instance from other instances using the same database.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_MACHINE_ID`
+
+* **`--threads-voice-udp [5]`**
+
+  * Number of threads to use for voice processing.
+  * **Type:** `INTEGER in [1 - 16]`
+  * **Environment Variable:** `TSSERVER_VOICE_UDP_THREADS`
+
+---
 
 #### Logging
 
-- **`--log-path [logs]`**
-    - Path to the directory where log files are stored.
-    - **Environment Variable:** `TSSERVER_LOG_PATH`
+* **`--log-path [logs]`**
 
-- **`--log-append [0]`**
-    - Write one ever-growing log file per virtual server.
-    - **Environment Variable:** `TSSERVER_APPEND_LOGS`
+  * Path to the directory where log files are stored.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_LOG_PATH`
+
+* **`--log-append`**
+
+  * Write one ever-growing log file per virtual server.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_APPEND_LOGS`
+
+---
 
 #### Virtual Server Management
 
-- **`--no-default-virtual-server [0]`**
-    - If specified, no default server is created even if no server exists in the database.
-    - **Environment Variable:** `TSSERVER_NO_DEFAULT_SERVER`
+* **`--no-default-virtual-server`**
+
+  * If specified, no default server is created even if no server exists in the database.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_NO_DEFAULT_SERVER`
+
+---
 
 #### File Transfer
 
-- **`--filetransfer-port :INT in [1 - 65535] [30033]`**
-    - Port on which to listen for file transfer connections.
-    - **Environment Variable:** `TSSERVER_FILE_TRANSFER_PORT`
+* **`--filetransfer-port [30033]`**
 
-- **`--filetransfer-ip [[0.0.0.0,::]]`**
-    - Address on which to listen for file transfer connections.
-    - **Environment Variable:** `TSSERVER_FILE_TRANSFER_IP`
+  * Port on which to listen and advertise for file transfer connections.
+  * **Type:** `INTEGER in [1 - 65535]`
+  * **Environment Variable:** `TSSERVER_FILE_TRANSFER_PORT`
+  * **Docker Note:** When running inside a Docker container, ensure that the **internal container port matches the external host port**. File transfers rely on clients connecting directly to this port, mismatches between the container's listening port and the published port will cause connectivity issues.
+
+* `--filetransfer-ip [[0.0.0.0,::]]`
+
+  * The address on which to listen for file transfer connections
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_FILE_TRANSFER_IP`
+
+---
 
 #### Database Configuration
 
-- **`--clear-database [0]`**
-    - **WARNING:** If present, the database is reset to default, and all servers, clients, etc., are lost!
+* **`--clear-database`**
 
-- **`--no-permission-update [0]`**
-    - Do not apply permission changes with a server update.
-    - **Environment Variable:** `TSSERVER_SKIP_PERMISSION_UPDATE`
+  * ⚠️ WARNING: Resets the database completely (deletes all servers, clients, etc.).
+  * **Type:** `BOOLEAN FLAG`
 
-- **`--db-plugin [sqlite3]`**
-    - Specifies which database plugin to use.
-    - **Environment Variable:** `TSSERVER_DATABASE_PLUGIN`
+* **`--no-permission-update`**
 
-- **`--db-sql-path [sql]`**
-    - Path to the SQL folder containing the SQL queries executed by the server.
-    - **Environment Variable:** `TSSERVER_DATABASE_SQL_PATH`
+  * Do not apply permission changes during server updates.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_SKIP_PERMISSION_UPDATE`
 
-- **`--db-sql-create-path [create_sqlite]`**
-    - Path relative to the `--sql-path` where to load the database creation scripts from. Valid values are `create_mariadb` or `create_sqlite`.
-    - **Environment Variable:** `TSSERVER_DATABASE_SQL_CREATE_PATH`
+* **`--db-plugin [sqlite3]`**
 
-- **`--db-client-keep-days [30]`**
-    - Number of days to keep clients in the database.
-    - **Environment Variable:** `TSSERVER_DATABASE_CLIENT_KEEP_DAYS`
+  * Specifies the database plugin to use.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_DATABASE_PLUGIN`
 
-#### Advanced Database Configuration
+* **`--db-sql-path [sql]`**
 
-- **`--db-skip-integrity-check [0]`**
-    - SQLite only: Skip the database integrity check when opening the database.
-    - **Environment Variable:** `TSSERVER_DATABASE_SKIP_INTEGRITY_CHECK`
+  * Path to folder containing SQL queries used by the server.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_DATABASE_SQL_PATH`
 
-- **`--db-host [127.0.0.1]`**
-    - Hostname/IP address to use when connecting to the database server.
-    - **Environment Variable:** `TSSERVER_DATABASE_HOST`
+* **`--db-sql-create-path [create_sqlite]`**
 
-- **`--db-port :INT in [1 - 65535] [5432]`**
-    - Port to use when connecting to the database server.
-    - **Environment Variable:** `TSSERVER_DATABASE_PORT`
+  * Subdirectory in SQL path to use for DB creation scripts.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_DATABASE_SQL_CREATE_PATH`
 
-- **`--db-socket`**
-    - Socket to use for the database connection.
-    - **Environment Variable:** `TSSERVER_DATABASE_SOCKET`
+* **`--db-client-keep-days [30]`**
 
-- **`--db-timeout :INT in [1 - 432000] [10]`**
-    - Timeout in seconds for the database connection.
-    - **Environment Variable:** `TSSERVER_DATABASE_TIMEOUT`
+  * Number of days to keep clients in the database.
+  * **Type:** `INTEGER`
+  * **Environment Variable:** `TSSERVER_DATABASE_CLIENT_KEEP_DAYS`
 
-- **`--db-name [teamspeak]`**
-    - The database name to use.
-    - **Environment Variable:** `TSSERVER_DATABASE_NAME`
+* **`--db-skip-integrity-check`**
 
-- **`--db-username`**
-    - The username to use for database authentication.
-    - **Environment Variable:** `TSSERVER_DATABASE_USERNAME`
+  * SQLite only: skip DB integrity check at startup.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_DATABASE_SKIP_INTEGRITY_CHECK`
 
-- **`--db-password`**
-    - The password to use for database authentication.
-    - **Environment Variable:** `TSSERVER_DATABASE_PASSWORD`
+* **`--db-log-queries`**
 
-- **`--db-connections :INT in [2 - 100] [10]`**
-    - Number of connections to establish to the database.
-    - **Environment Variable:** `TSSERVER_DATABASE_CONNECTIONS`
+  * Enable logging of SQL queries.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_DATABASE_LOG_QUERIES`
 
-- **`--db-log-queries [0]`**
-    - Whether to log database queries.
-    - **Environment Variable:** `TSSERVER_DATABASE_LOG_QUERIES`
+#### Database Connection Options
+* **`--db-host [127.0.0.1]`**
+
+  * Database hostname or IP.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_DATABASE_HOST`
+
+* **`--db-port [5432]`**
+
+  * Database port.
+  * **Type:** `INTEGER in [1 - 65535]`
+  * **Environment Variable:** `TSSERVER_DATABASE_PORT`
+
+* **`--db-socket`**
+
+  * Socket file to use for database connection.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_DATABASE_SOCKET`
+
+* **`--db-timeout [10]`**
+
+  * Timeout in seconds when connecting to DB.
+  * **Type:** `INTEGER in [1 - 432000]`
+  * **Environment Variable:** `TSSERVER_DATABASE_TIMEOUT`
+
+* **`--db-name [teamspeak]`**
+
+  * Name of the database to use.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_DATABASE_NAME`
+
+* **`--db-username`**
+
+  * The username to use for database authentication.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_DATABASE_USERNAME`
+
+* **`--db-password`**
+
+  * The password to use for database authentication.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_DATABASE_PASSWORD`
+
+* **`--db-connections [10]`**
+
+  * Number of connections to establish to the database.
+  * **Type:** `INTEGER in [2 - 100]`
+  * **Environment Variable:** `TSSERVER_DATABASE_CONNECTIONS`
+
+---
 
 #### Query Options
 
-- **`--query-pool-size :UINT in [2 - 32] [2]`**
-    - Number of threads to use for query command processing.
-    - **Environment Variable:** `TSSERVER_QUERY_POOL_SIZE`
+* **`--query-pool-size [2]`**
 
-- **`--query-log-timing :INT in [10 - 31556952] [3600]`**
-    - Interval in seconds after which to log query statistics.
-    - **Environment Variable:** `TSSERVER_QUERY_LOG_TIMING`
+  * How many threads to use for query command processing.
+  * **Type:** `INTEGER in [2 - 32]`
+  * **Environment Variable:** `TSSERVER_QUERY_POOL_SIZE`
 
-- **`--query-ip-allow-list [query_ip_allowlist.txt]`**
-    - File path to a file which lists the addresses that are exempt from query flood protection.
-    - **Environment Variable:** `TSSERVER_QUERY_ALLOW_LIST`
+* **`--query-log-timing [3600]`**
 
-- **`--query-ip-block-list [query_ip_denylist.txt]`**
-    - File path to a file which lists the addresses that are blocked from the query interface.
-    - **Environment Variable:** `TSSERVER_QUERY_DENY_LIST`
+  * Interval in seconds after which to log query statistics.
+  * **Type:** `INTEGER in [10 - 31556952]`
+  * **Environment Variable:** `TSSERVER_QUERY_LOG_TIMING`
 
-- **`--query-admin-password`**
-    - Override the query password for the built-in serveradmin account.
-    - **Environment Variable:** `TSSERVER_QUERY_ADMIN_PASSWORD`
+* **`--query-ip-allow-list [query_ip_allowlist.txt]`**
 
-- **`--query-log-commands [0]`**
-    - If specified, every command received on the query interface will be logged.
-    - **Environment Variable:** `TSSERVER_QUERY_LOG_COMMANDS`
+  * File path listing IPs exempt from query flood protection.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_QUERY_ALLOW_LIST`
 
-- **`--query-skip-brute-force-check [0]`**
-    - Skips brute force checking when clients connect to the query interface.
-    - **Environment Variable:** `TSSERVER_QUERY_SKIP_BRUTE_FORCE_CHECK`
+* **`--query-ip-block-list [query_ip_denylist.txt]`**
 
-- **`--query-buffer-mb :INT in [20 - 100] [20]`**
-    - Memory allocation for query connection buffering.
-    - **Environment Variable:** `TSSERVER_QUERY_BUFFER_MB`
+  * File path listing IPs blocked from the query interface.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_QUERY_DENY_LIST`
 
-- **`--query-documentation-path [serverquerydocs]`**
-    - Path to the query documentation files.
-    - **Environment Variable:** `TSSERVER_QUERY_DOCUMENTATION_PATH`
+* **`--query-admin-password`**
 
-- **`--query-timeout [300]`**
-    - Specifies the timeout for query connections.
-    - **Environment Variable:** `TSSERVER_QUERY_TIMEOUT`
+  * Override the query password for the built-in serveradmin account.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_QUERY_ADMIN_PASSWORD`
+
+* **`--query-log-commands`**
+
+  * Log every command received on the query interface.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_QUERY_LOG_COMMANDS`
+
+* **`--query-skip-brute-force-check`**
+
+  * Skip brute force checking on query interface connections.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_QUERY_SKIP_BRUTE_FORCE_CHECK`
+
+* **`--query-buffer-mb [20]`**
+
+  * How much memory (in MB) to allocate for query connection buffering.
+  * **Type:** `INTEGER in [20 - 100]`
+  * **Environment Variable:** `TSSERVER_QUERY_BUFFER_MB`
+
+* **`--query-documentation-path [serverquerydocs]`**
+
+  * Path to the query documentation files.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_QUERY_DOCUMENTATION_PATH`
+
+* **`--query-timeout [300]`**
+
+  * Timeout in seconds before query connections expire.
+  * **Type:** `INTEGER`
+  * **Environment Variable:** `TSSERVER_QUERY_TIMEOUT`
+
+---
 
 #### Query SSH Options
 
-- **`--query-ssh-enable [0]`**
-    - Enable the SSH query interface.
-    - **Environment Variable:** `TSSERVER_QUERY_SSH_ENABLED`
+* **`--query-ssh-enable`**
 
-- **`--query-ssh-port :INT in [1 - 65535] [10022]`**
-    - Port on which to listen for SSH query connections.
-    - **Environment Variable:** `TSSERVER_QUERY_SSH_PORT`
+  * Enable the SSH query interface.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_QUERY_SSH_ENABLED`
 
-- **`--query-ssh-ip [[0.0.0.0,::]]`**
-    - Address on which to listen for SSH query connections.
-    - **Environment Variable:** `TSSERVER_QUERY_SSH_IP`
+* **`--query-ssh-port [10022]`**
 
-- **`--query-ssh-rsa-key [ssh_host_rsa_key]`**
-    - The SSH RSA host key to use.
-    - **Environment Variable:** `TSSERVER_QUERY_SSH_RSA_KEY`
+  * Port on which to listen for SSH query connections.
+  * **Type:** `INTEGER in [1 - 65535]`
+  * **Environment Variable:** `TSSERVER_QUERY_SSH_PORT`
+
+* **`--query-ssh-ip [[0.0.0.0,::]]`**
+
+  * Address to listen on for SSH query connections.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_QUERY_SSH_IP`
+
+* **`--query-ssh-rsa-key [ssh_host_rsa_key]`**
+
+  * Path to the SSH RSA host key file.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_QUERY_SSH_RSA_KEY`
+
+---
 
 #### Query HTTP Options
 
-- **`--query-http-enable [0]`**
-    - Enable the HTTP query interface.
-    - **Environment Variable:** `TSSERVER_QUERY_HTTP_ENABLED`
+* **`--query-http-enable`**
 
-- **`--query-http-port :INT in [1 - 65535] [10080]`**
-    - Port on which to listen for Web Query connections.
-    - **Environment Variable:** `TSSERVER_QUERY_HTTP_PORT`
+  * Enable the HTTP query interface.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_QUERY_HTTP_ENABLED`
 
-- **`--query-http-ip [[0.0.0.0,::]]`**
-    - Address on which to listen for Web Query connections.
-    - **Environment Variable:** `TSSERVER_QUERY_HTTP_IP`
+* **`--query-http-port [10080]`**
+
+  * Port on which to listen for Web Query connections.
+  * **Type:** `INTEGER in [1 - 65535]`
+  * **Environment Variable:** `TSSERVER_QUERY_HTTP_PORT`
+
+* **`--query-http-ip [[0.0.0.0,::]]`**
+
+  * Address to listen on for Web Query connections.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_QUERY_HTTP_IP`
+
+---
 
 #### Query HTTPS Options
 
-- **`--query-https-enable [0]`**
-    - Enable the HTTPS query interface.
-    - **Environment Variable:** `TSSERVER_QUERY_HTTPS_ENABLED`
+* **`--query-https-enable`**
 
-- **`--query-https-port :INT in [1 - 65535] [10443]`**
-    - Port on which to listen for secure Web Query connections.
-    - **Environment Variable:** `TSSERVER_QUERY_HTTPS_PORT`
+  * Enable the HTTPS query interface.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_QUERY_HTTPS_ENABLED`
 
-- **`--query-https-ip [[0.0.0.0,::]]`**
-    - Address on which to listen for secure Web Query connections.
-    - **Environment Variable:** `TSSERVER_QUERY_HTTPS_IP`
+* **`--query-https-port [10443]`**
 
-- **`--query-https-certificate`**
-    - File containing the certificate for secure Web Query connections.
-    - **Environment Variable:** `TSSERVER_QUERY_HTTPS_CERT`
+  * Port on which to listen for secure Web Query connections.
+  * **Type:** `INTEGER in [1 - 65535]`
+  * **Environment Variable:** `TSSERVER_QUERY_HTTPS_PORT`
 
-- **`--query-https-private-key`**
-    - File containing the private key for the certificate.
-    - **Environment Variable:** `TSSERVER_QUERY_HTTPS_PRIVATE_KEY`
+* **`--query-https-ip [[0.0.0.0,::]]`**
+
+  * Address to listen on for secure Web Query connections.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_QUERY_HTTPS_IP`
+
+* **`--query-https-certificate`**
+
+  * Path to certificate file for HTTPS Web Query.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_QUERY_HTTPS_CERT`
+
+* **`--query-https-private-key`**
+
+  * Path to private key file used with the certificate.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_QUERY_HTTPS_PRIVATE_KEY`
+
+---
 
 #### Additional Options
 
-- **`--http-proxy`**
-    - Proxy server for connecting to external services.
-    - **Environment Variable:** `TSSERVER_HTTP_PROXY`
+* **`--http-proxy`**
 
-- **`--accept-license [0]`**
-    - Confirms you have read and accepted the server license agreement.
-    - **Environment Variable:** `TSSERVER_LICENSE_ACCEPTED`
+  * Proxy server used for external connections.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_HTTP_PROXY`
 
-- **`--crashdump-path [crashdumps]`**
-    - Path to store crash dumps.
-    - **Environment Variable:** `TSSERVER_CRASHDUMP_PATH`
+* **`--crashdump-path [crashdumps]`**
 
-- **`--daemon [0]`**
-    - Run the server in the background.
-    - **Environment Variable:** `TSSERVER_DAEMON`
+  * Path where crash dumps should be written.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_CRASHDUMP_PATH`
 
-- **`--pid-file`**
-    - File to store the process ID of the server.
-    - **Environment Variable:** `TSSERVER_PID_FILE`
+* **`--daemon`**
 
-- **`--hints-enabled [0]`**
-    - Enable permission hints (may affect performance on larger servers).
-    - **Environment Variable:** `TSSERVER_HINTS_ENABLED`
+  * Run the server in the background (daemon mode).
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_DAEMON`
 
-- **`--maxmind-db-path`**
-    - Path to the MaxMind IP database.
-    - **Environment Variable:** `TSSERVER_MAXMIND_DB_PATH`
+* **`--pid-file`**
 
-- **`--administrative-domain`**
-    - Administrative domain.
-    - **Environment Variable:** `TSSERVER_ADMINISTRATIVE_DOMAIN`
+  * File to write the process ID to.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_PID_FILE`
+
+* **`--hints-enabled`**
+
+  * Enable permission hints (can impact performance on large servers).
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_HINTS_ENABLED`
+
+* **`--maxmind-db-path`**
+
+  * Path to the MaxMind GeoIP database.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_MAXMIND_DB_PATH`
+
+* **`--administrative-domain`**
+
+  * Administrative domain for internal or regulatory identification.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_ADMINISTRATIVE_DOMAIN`
