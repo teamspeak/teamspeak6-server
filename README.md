@@ -1,3 +1,34 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="right">
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=en">English</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=zh-CN">简体中文</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=zh-TW">繁體中文</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=ja">日本語</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=ko">한국어</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=hi">हिन्दी</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=th">ไทย</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=fr">Français</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=de">Deutsch</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=es">Español</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=it">Itapano</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=ru">Русский</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=pt">Português</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=nl">Nederlands</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=pl">Polski</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=ar">العربية</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=fa">فارسی</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=tr">Türkçe</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=vi">Tiếng Việt</a></p>
+        <p><a href="https://openaitx.github.io/view.html?user=teamspeak&project=teamspeak6-server&lang=id">Bahasa Indonesia</a></p>
+      </div>
+    </div>
+  </details>
+</div>
+
 # TeamSpeak 6 Server - Beta Release README
 
 Welcome to the Beta release of the TeamSpeak 6 Server! We're excited to have you onboard as you explore the next generation of TeamSpeak. This document will guide you through getting started and highlight important details about the current Beta.
