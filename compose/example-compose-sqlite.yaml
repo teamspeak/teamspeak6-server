@@ -8,6 +8,7 @@ services:
       - "30033:30033/tcp"  # File transfer port
       # - "10022:10022/tcp" # (Optional) ServerQuery SSH port
       # - "10080:10080/tcp"  # (Optional) WebQuery port
+      # - "9187:9187/tcp"    # (Optional) Prometheus metrics endpoint
     environment:
       - TSSERVER_LICENSE_ACCEPTED=accept
       - TSSERVER_DEFAULT_PORT=9987
@@ -19,6 +20,8 @@ services:
       # - TSSERVER_MACHINE_ID=my_unique_machine_id
       # - TSSERVER_LOG_PATH=/var/tsserver/logs
       # - TSSERVER_QUERY_ADMIN_PASSWORD=secretpassword
+      # - TSSERVER_METRICS_ENABLED=true
+      # - TSSERVER_METRICS_IP=0.0.0.0
     volumes:
       - teamspeak-data:/var/tsserver
 

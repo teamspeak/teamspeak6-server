@@ -8,6 +8,7 @@ services:
       - "30033:30033/tcp" # File transfer port
       # - "10080:10080/tcp" # WebQuery port
       # - "10022:10022/tcp" # SSHQuery port
+      # - "9187:9187/tcp"   # Prometheus metrics endpoint
     environment:
       - TSSERVER_LICENSE_ACCEPTED=accept
       - TSSERVER_DEFAULT_PORT=9987
@@ -16,6 +17,8 @@ services:
       - TSSERVER_FILE_TRANSFER_IP=0.0.0.0
       # - TSSERVER_QUERY_HTTP_ENABLED=true
       # - TSSERVER_QUERY_SSH_ENABLED=true
+      # - TSSERVER_METRICS_ENABLED=true
+      # - TSSERVER_METRICS_IP=0.0.0.0
 
       # Database settings
       - TSSERVER_DATABASE_PLUGIN=mariadb

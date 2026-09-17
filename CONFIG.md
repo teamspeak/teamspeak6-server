@@ -17,6 +17,7 @@ This document outlines the most commonly used command-line parameters and their 
 | `--license-path <path>`       | `TSSERVER_LICENSE_PATH`        | Directory path where the server will look for the `licensekey.dat` file.                                                                              |
 | `--accept-license`            | `TSSERVER_LICENSE_ACCEPTED`    | Use the --accept-license flag or set the environment variable to 1 or accept to confirm that you have read and accepted the server license agreement. |
 | `--default-voice-port <port>` | `TSSERVER_DEFAULT_PORT`        | Permanently sets the default UDP voice port for the first virtual server created (Default: 9987).                                                     |
+| `--log-timezone <zone>`       | `TSSERVER_LOG_TIMEZONE`        | Time zone used for log timestamps, `utc` (default) or `local`. On Windows, `local` requires Windows 10 1903 / Windows Server 2022 or later.           |
 
 ---
 
@@ -25,6 +26,23 @@ This document outlines the most commonly used command-line parameters and their 
 | Parameter                         | Environment Variable           | Description                                            |
 |-----------------------------------|--------------------------------|--------------------------------------------------------|
 | `--filetransfer-port <port>`      | `TSSERVER_FILE_TRANSFER_PORT`  | The TCP port used for file transfers (Default: 30033). |
+
+---
+
+#### S3 File Transfer
+
+When enabled, the server stores channel files in an S3 compatible bucket and hands clients presigned URLs instead of serving the transfer itself.
+
+| Parameter                              | Environment Variable                     | Description                                                             |
+|----------------------------------------|------------------------------------------|-------------------------------------------------------------------------|
+| `--s3ft-enabled`                       | `TSSERVER_S3FT_ENABLED`                  | Enables S3 file transfer (Default: off).                                |
+| `--s3ft-domain <host>`                 | `TSSERVER_S3FT_DOMAIN`                   | Endpoint domain of the S3 service, for example an AWS or MinIO host.    |
+| `--s3ft-bucket <name>`                 | `TSSERVER_S3FT_BUCKET`                   | Bucket the server stores files in.                                      |
+| `--s3ft-region <region>`               | `TSSERVER_S3FT_REGION`                   | Region of the bucket.                                                   |
+| `--s3ft-access-key <key>`              | `TSSERVER_S3FT_ACCESS_KEY`               | Access key used to authenticate against the S3 service.                 |
+| `--s3ft-secret-key <key>`              | `TSSERVER_S3FT_SECRET_KEY`               | Secret key belonging to the access key.                                 |
+| `--s3ft-account-id <id>`               | `TSSERVER_S3FT_ACCOUNT_ID`               | Optional account id, required by some providers.                        |
+| `--s3ft-presigned-url-expiration <sec>`| `TSSERVER_S3FT_PRESIGNED_URL_EXPIRATION` | Lifetime of a presigned URL in seconds (Default: 300).                  |
 
 ---
 
@@ -54,6 +72,41 @@ This document outlines the most commonly used command-line parameters and their 
 | `--query-admin-password <pass>` | `TSSERVER_QUERY_ADMIN_PASSWORD`  | Sets a password for the serveradmin query account, overriding the database. |
 | `--query-ip-allow-list <file>`  | `TSSERVER_QUERY_ALLOW_LIST`      | Path to a file listing IPs exempt from query flood protection.              |
 | `--query-ip-block-list <file>`  | `TSSERVER_QUERY_DENY_LIST`       | Path to a file listing IPs that are blocked from the query interface.       |
+| `--query-admin-api-key <key>`   | `TSSERVER_QUERY_ADMIN_API_KEY`   | Sets the Web Query API key of the serveradmin account.                      |
+| `--query-ssh-allow-guest <0/1>` | `TSSERVER_QUERY_SSH_ALLOW_GUEST` | Allow unauthenticated guest sessions on SSH (user `guest`), (Default: 1).   |
+| `--query-http-allow-guest <0/1>`| `TSSERVER_QUERY_HTTP_ALLOW_GUEST`| Allow unauthenticated guest requests on Web Query, (Default: 1).            |
+
+---
+
+#### Metrics
+
+The server can expose its monitoring data as Prometheus metrics, without a ServerQuery admin
+key. The endpoint is disabled by default, and when enabled it is unauthenticated.
+
+| Parameter                  | Environment Variable        | Description                                                                                               |
+|----------------------------|-----------------------------|-----------------------------------------------------------------------------------------------------------|
+| `--metrics-enable`         | `TSSERVER_METRICS_ENABLED`  | Enables the Prometheus metrics endpoint, scraped at `GET /metrics`.                                       |
+| `--metrics-port <port>`    | `TSSERVER_METRICS_PORT`     | Port for the metrics endpoint (Default: 9187).                                                            |
+| `--metrics-ip <ip>`        | `TSSERVER_METRICS_IP`       | Address(es) to bind the endpoint to (Default: localhost only).                                            |
+| `--metrics-voice`          | `TSSERVER_METRICS_VOICE`    | Adds per-packet voice diagnostics. This instruments the hot path, so benchmark before enabling under load. |
+
+---
+
+#### Performance Tuning
+
+The defaults suit most servers. Change these only when you have measured a reason to.
+
+| Parameter                        | Environment Variable             | Description                                                                            |
+|----------------------------------|----------------------------------|----------------------------------------------------------------------------------------|
+| `--threads-voice-udp <n>`        | `TSSERVER_VOICE_UDP_THREADS`     | Threads for UDP socket send/receive, shared by all packet types (Default: 16).         |
+| `--threads-voice <n>`            | `TSSERVER_VOICE_THREADS`         | Threads per virtual server for voice packets (Default: 4).                             |
+| `--threads-command <n>`          | `TSSERVER_COMMAND_THREADS`       | Threads per virtual server for command packets (Default: 4).                           |
+| `--threads-ack <n>`              | `TSSERVER_ACK_THREADS`           | Threads per virtual server for acknowledge packets (Default: 3).                       |
+| `--threads-ping <n>`             | `TSSERVER_PING_THREADS`          | Threads per virtual server for ping and pong packets (Default: 2).                     |
+| `--threads-init <n>`             | `TSSERVER_INIT_THREADS`          | Threads per virtual server for connection initialization packets (Default: 2).         |
+| `--socket-read-depth <n>`        | `TSSERVER_SOCKET_READ_DEPTH`     | Concurrent receives per UDP socket, only worthwhile at high packet rates (Default: 4). |
+| `--socket-receive-buffer <bytes>`| `TSSERVER_SOCKET_RECEIVE_BUFFER` | UDP receive buffer, clamped by the kernel to `net.core.rmem_max` (Default: 4194304).   |
+| `--socket-send-buffer <bytes>`   | `TSSERVER_SOCKET_SEND_BUFFER`    | UDP send buffer, clamped by the kernel to `net.core.wmem_max` (Default: 4194304).      |
 
 ### Example `tsserver.yaml` Configuration
 
@@ -192,10 +245,10 @@ server:
   * **Type:** `STRING`
   * **Environment Variable:** `TSSERVER_MACHINE_ID`
 
-* **`--threads-voice-udp [5]`**
+* **`--threads-voice-udp [16]`**
 
-  * Number of threads to use for voice processing.
-  * **Type:** `INTEGER in [1 - 16]`
+  * Threads for UDP socket send/receive, shared by all packet types and virtual servers.
+  * **Type:** `INTEGER in [1 - 32]`
   * **Environment Variable:** `TSSERVER_VOICE_UDP_THREADS`
 
 ---
@@ -213,6 +266,13 @@ server:
   * Write one ever-growing log file per virtual server.
   * **Type:** `BOOLEAN FLAG`
   * **Environment Variable:** `TSSERVER_APPEND_LOGS`
+
+* **`--log-timezone [utc]`**
+
+  * Time zone used for log timestamps. Valid values are `utc` and `local`.
+  * On Windows, `local` requires Windows 10 1903 / Windows Server 2022 or later.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_LOG_TIMEZONE`
 
 ---
 
@@ -240,6 +300,59 @@ server:
   * The address on which to listen for file transfer connections
   * **Type:** `STRING`
   * **Environment Variable:** `TSSERVER_FILE_TRANSFER_IP`
+
+---
+
+#### S3 File Transfer Options
+
+* **`--s3ft-enabled`**
+
+  * Enable S3 file transfer.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_S3FT_ENABLED`
+
+* **`--s3ft-domain`**
+
+  * Endpoint domain of the S3 service, for example an AWS endpoint or a self-hosted MinIO host.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_S3FT_DOMAIN`
+
+* **`--s3ft-bucket`**
+
+  * Name of the bucket the server stores files in.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_S3FT_BUCKET`
+
+* **`--s3ft-region`**
+
+  * Region the bucket lives in.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_S3FT_REGION`
+
+* **`--s3ft-access-key`**
+
+  * Access key used to authenticate against the S3 service.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_S3FT_ACCESS_KEY`
+
+* **`--s3ft-secret-key`**
+
+  * Secret key belonging to the access key. Prefer the environment variable or the
+    configuration file over the command line, so the value does not show up in the process list.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_S3FT_SECRET_KEY`
+
+* **`--s3ft-account-id`**
+
+  * Optional account id, required by some S3 providers.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_S3FT_ACCOUNT_ID`
+
+* **`--s3ft-presigned-url-expiration [300]`**
+
+  * How long a presigned URL stays valid, in seconds.
+  * **Type:** `INTEGER`
+  * **Environment Variable:** `TSSERVER_S3FT_PRESIGNED_URL_EXPIRATION`
 
 ---
 
@@ -348,13 +461,13 @@ server:
 * **`--query-pool-size [2]`**
 
   * How many threads to use for query command processing.
-  * **Type:** `INTEGER in [2 - 32]`
+  * **Type:** `INTEGER in [1 - 32]`
   * **Environment Variable:** `TSSERVER_QUERY_POOL_SIZE`
 
-* **`--query-log-timing [3600]`**
+* **`--query-log-timing [0]`**
 
-  * Interval in seconds after which to log query statistics.
-  * **Type:** `INTEGER in [10 - 31556952]`
+  * Interval in seconds after which to log query statistics, `0` disables them.
+  * **Type:** `INTEGER in [0 - 31556952]`
   * **Environment Variable:** `TSSERVER_QUERY_LOG_TIMING`
 
 * **`--query-ip-allow-list [query_ip_allowlist.txt]`**
@@ -374,6 +487,13 @@ server:
   * Override the query password for the built-in serveradmin account.
   * **Type:** `STRING`
   * **Environment Variable:** `TSSERVER_QUERY_ADMIN_PASSWORD`
+
+* **`--query-admin-api-key`**
+
+  * Sets the Web Query API key of the built-in serveradmin account. The first run creates the
+    key, later starts replace the existing manage-scope key.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_QUERY_ADMIN_API_KEY`
 
 * **`--query-log-commands`**
 
@@ -433,6 +553,14 @@ server:
   * **Type:** `STRING`
   * **Environment Variable:** `TSSERVER_QUERY_SSH_RSA_KEY`
 
+* **`--query-ssh-allow-guest [1]`**
+
+  * Allow unauthenticated guest sessions on the SSH query interface, by connecting as user
+    `guest` without a password. What a guest may do is governed by the Guest Server Query
+    group permissions. Set to `0` to require authentication.
+  * **Type:** `BOOLEAN`
+  * **Environment Variable:** `TSSERVER_QUERY_SSH_ALLOW_GUEST`
+
 ---
 
 #### Query HTTP Options
@@ -454,6 +582,14 @@ server:
   * Address to listen on for Web Query connections.
   * **Type:** `STRING`
   * **Environment Variable:** `TSSERVER_QUERY_HTTP_IP`
+
+* **`--query-http-allow-guest [1]`**
+
+  * Allow requests without an API key on the http and https query interfaces. They run in the
+    `guest` scope, governed by the Guest Server Query group permissions. Set to `0` to require
+    an API key.
+  * **Type:** `BOOLEAN`
+  * **Environment Variable:** `TSSERVER_QUERY_HTTP_ALLOW_GUEST`
 
 ---
 
@@ -534,3 +670,64 @@ server:
   * Administrative domain for internal or regulatory identification.
   * **Type:** `STRING`
   * **Environment Variable:** `TSSERVER_ADMINISTRATIVE_DOMAIN`
+
+---
+
+#### Metrics Options
+
+* **`--metrics-enable`**
+
+  * Enable the Prometheus metrics endpoint, scraped at `GET /metrics`.
+  * The endpoint is unauthenticated. Keep it on the default loopback bind address, or
+    restrict access with a firewall or reverse proxy.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_METRICS_ENABLED`
+
+* **`--metrics-port [9187]`**
+
+  * Port for the Prometheus metrics endpoint.
+  * **Type:** `INTEGER in [1 - 65535]`
+  * **Environment Variable:** `TSSERVER_METRICS_PORT`
+
+* **`--metrics-ip [[127.0.0.1,::1]]`**
+
+  * Address(es) to bind the metrics endpoint to.
+  * **Type:** `STRING`
+  * **Environment Variable:** `TSSERVER_METRICS_IP`
+
+* **`--metrics-voice`**
+
+  * Add per-packet voice diagnostics, such as forwarding latency, queueing, drops and
+    admission. This instruments the voice hot path, so benchmark before enabling it on a
+    busy server.
+  * **Type:** `BOOLEAN FLAG`
+  * **Environment Variable:** `TSSERVER_METRICS_VOICE`
+
+---
+
+#### Performance Tuning Options
+
+The defaults suit most servers. Change these only when measurements call for it.
+
+* **`--threads-voice [4]`**, **`--threads-command [4]`**, **`--threads-ack [3]`**,
+  **`--threads-ping [2]`**, **`--threads-init [2]`**
+
+  * Threads per virtual server for voice, command, acknowledge, ping/pong and connection
+    initialization packets.
+  * **Type:** `INTEGER in [1 - 32]`
+  * **Environment Variables:** `TSSERVER_VOICE_THREADS`, `TSSERVER_COMMAND_THREADS`,
+    `TSSERVER_ACK_THREADS`, `TSSERVER_PING_THREADS`, `TSSERVER_INIT_THREADS`
+
+* **`--socket-read-depth [4]`**
+
+  * Concurrent receives per UDP socket. Only worthwhile at high packet rates.
+  * **Type:** `INTEGER in [1 - 32]`
+  * **Environment Variable:** `TSSERVER_SOCKET_READ_DEPTH`
+
+* **`--socket-receive-buffer [4194304]`** and **`--socket-send-buffer [4194304]`**
+
+  * UDP socket buffers in bytes. The kernel clamps them to `net.core.rmem_max` and
+    `net.core.wmem_max`; when that happens the server logs a warning at startup naming the
+    value it actually received.
+  * **Type:** `INTEGER in [65536 - 67108864]`
+  * **Environment Variables:** `TSSERVER_SOCKET_RECEIVE_BUFFER`, `TSSERVER_SOCKET_SEND_BUFFER`

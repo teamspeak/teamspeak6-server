@@ -40,7 +40,7 @@ Don't want to self-host, or simply require an easier way to get started with Tea
 
 3. **YAML Configuration File:** For a persistent configuration, it is highly recommended to use a tsserver.yaml file. You can generate a default config file using the --write-config-file flag.
 
-Key settings you can control include network ports (voice, file transfer), database connections (supports SQLite and MariaDB), IP bindings, and logging options.
+Key settings you can control include network ports (voice, file transfer), database connections (supports SQLite and MariaDB), IP bindings, and logging options. A Prometheus metrics endpoint and ServerQuery guest access are available as well; both are covered in [CONFIG.md](CONFIG.md).
 
 For a complete list of available options, run the server with the `--help` flag or refer to the [CONFIG.md](CONFIG.md).
 
@@ -66,7 +66,7 @@ Open Command Prompt or PowerShell and navigate to the directory where you extrac
 
 Run the server executable, making sure to accept the license:
 ```powershell
-tsserver.exe
+tsserver.exe --accept-license
 ```
 
 <h2><img width="32" src="/icons/docker.svg" alt="Docker">&nbsp;Run the Server with Docker (Recommended)</h2>
